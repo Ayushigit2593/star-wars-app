@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
+import Landingpage from "./pages/landingpage";
+import Header from "./components/Header";
+import Layout from "./components/Layout";
+import CircularProgress from "@mui/material/CircularProgress";
+const DetailsPage = React.lazy(() => import("./pages/detailspage"));
+const CategoryPage = React.lazy(() => import("./pages/catergorypage"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Header></Header>
+      <Suspense fallback={<CircularProgress />}>
+        <Routes>
+          <Route path="/" element={<Landingpage></Landingpage>}></Route>
+          <Route path="/:type" element={<CategoryPage></CategoryPage>}></Route>
+          <Route
+            path="/:type/:page"
+            element={<DetailsPage></DetailsPage>}
+          ></Route>
+        </Routes>
+      </Suspense>
+    </Layout>
   );
 }
 
