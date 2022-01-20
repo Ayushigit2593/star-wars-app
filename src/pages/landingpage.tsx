@@ -1,6 +1,7 @@
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
+import styles from "./landingpage.module.css";
 const Landingpage: React.FC<{}> = () => {
   const history = useNavigate();
   const routeHandler = (page: string) => {
@@ -8,7 +9,7 @@ const Landingpage: React.FC<{}> = () => {
   };
   return (
     <>
-      <Box sx={{ width: 50, height: 500 }}>
+      <Box className={styles.btn__explorer}>
         <Button
           variant="contained"
           onClick={() => routeHandler("people")}

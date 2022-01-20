@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 const DetailData: React.FC<{}> = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [detailData, setDetailData] = useState({});
@@ -35,7 +36,11 @@ const DetailData: React.FC<{}> = () => {
   }, [type, page, dispatch]);
   return (
     <>
-      {loading && <CircularProgress></CircularProgress>}
+      {loading && (
+        <Box sx={{ textAlign: "center" }}>
+          <CircularProgress></CircularProgress>
+        </Box>
+      )}
       {errorMessage && <div>{errorMessage}</div>}
       {!errorMessage &&
         Object.entries(detailData).map(([key, value], index) => {
@@ -50,6 +55,7 @@ const DetailData: React.FC<{}> = () => {
             }
             return (
               <TextField
+                sx={{ display: "block", marginTop: "20px" }}
                 key={index + 1}
                 disabled
                 id="standard-disabled"

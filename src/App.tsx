@@ -4,22 +4,42 @@ import Landingpage from "./pages/landingpage";
 import Header from "./components/Header";
 import Layout from "./components/Layout";
 import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 const DetailsPage = React.lazy(() => import("./pages/detailspage"));
 const CategoryPage = React.lazy(() => import("./pages/catergorypage"));
 
 function App() {
   return (
-    <Layout>
+    <Layout diplayClass="">
       <Header></Header>
-      <Suspense fallback={<CircularProgress />}>
-        <Routes>
-          <Route path="/" element={<Landingpage></Landingpage>}></Route>
-          <Route path="/:type" element={<CategoryPage></CategoryPage>}></Route>
-          <Route
-            path="/:type/:page"
-            element={<DetailsPage></DetailsPage>}
-          ></Route>
-        </Routes>
+      <Suspense
+        fallback={
+          <Box sx={{ textAlign: "center" }}>
+            <CircularProgress />
+          </Box>
+        }
+      >
+        <Layout diplayClass="body-content">
+          <Routes>
+            <Route path="/" element={<Landingpage></Landingpage>}></Route>
+            <Route
+              path="/:type"
+              element={
+                <Layout diplayClass="box-content">
+                  <CategoryPage></CategoryPage>
+                </Layout>
+              }
+            ></Route>
+            <Route
+              path="/:type/:page"
+              element={
+                <Layout diplayClass="box-content form_container">
+                  <DetailsPage></DetailsPage>
+                </Layout>
+              }
+            ></Route>
+          </Routes>
+        </Layout>
       </Suspense>
     </Layout>
   );

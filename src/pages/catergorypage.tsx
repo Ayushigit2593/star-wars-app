@@ -1,11 +1,7 @@
 import Category from "../components/Category";
 
 const catergorypage: React.FC<{}> = () => {
-  return (
-    <div>
-      <Category></Category>
-    </div>
-  );
+  return <Category></Category>;
 };
 
 export default catergorypage;

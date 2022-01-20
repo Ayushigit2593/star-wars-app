@@ -15,6 +15,8 @@ import ListItemText from "@mui/material/ListItemText";
 import PublicIcon from "@mui/icons-material/Public";
 import MovieIcon from "@mui/icons-material/Movie";
 import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import styles from "./Category.module.css";
 const Category: React.FC<{}> = () => {
   type dataModel = {
     name: string;
@@ -53,18 +55,23 @@ const Category: React.FC<{}> = () => {
 
   return (
     <>
-      {loading && <CircularProgress></CircularProgress>}
+      {loading && (
+        <Box sx={{ textAlign: "center" }}>
+          <CircularProgress></CircularProgress>
+        </Box>
+      )}
       {errorMessage && <div>{errorMessage}</div>}
       {!errorMessage && (
         <List>
           {categoryData.map((item: dataModel, index) => (
             <ListItem
+              sx={{ borderBottom: "1px solid #ddd" }}
               disablePadding
               key={index + 1}
               onClick={() => listClickHandler(`${index + 1}`)}
             >
-              <ListItemButton>
-                <ListItemIcon>
+              <ListItemButton className={styles.list__block}>
+                <ListItemIcon className={styles.category__icon}>
                   {type === "people" && <AccountCircleIcon></AccountCircleIcon>}
                   {type === "planets" && <PublicIcon></PublicIcon>}
                   {type === "films" && <MovieIcon></MovieIcon>}
