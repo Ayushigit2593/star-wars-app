@@ -1,11 +1,11 @@
-import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import styles from "./landingpage.module.css";
+import Button from "@mui/material/Button";
 const Landingpage: React.FC<{}> = () => {
   const history = useNavigate();
   const routeHandler = (page: string) => {
-    history(`/${page}`);
+    history(`navigate/${page}`);
   };
   return (
     <>

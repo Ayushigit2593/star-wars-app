@@ -10,12 +10,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 const Header: React.FC<{}> = () => {
   const [header, setHeader] = useState("Star Wars Explorer");
   const category = useSelector((state: RootState) => state.storedata.category);
-  const page = useSelector((state: RootState) => state.storedata.category);
   useEffect(() => {
     category === ""
       ? setHeader("Star Wars Explorer")
       : setHeader(`${category[0].toUpperCase() + category.slice(1)}`);
-    const backFunction = (): any => {
+    const backFunction = (): void => {
       window.location.pathname === "/"
         ? setHeader("Star Wars Explorer")
         : setHeader(`${category[0].toUpperCase() + category.slice(1)}`);
@@ -24,7 +23,7 @@ const Header: React.FC<{}> = () => {
     return () => {
       window.removeEventListener("popstate", backFunction);
     };
-  }, [category, page]);
+  }, [category]);
   return (
     <AppBar position="static">
       <Toolbar>

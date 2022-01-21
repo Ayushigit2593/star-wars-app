@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { dataSliceAction } from "../store/dataslice";
 import type { RootState, AppDispatch } from "../store/store";
 import { useNavigate } from "react-router-dom";
+import styles from "./Category.module.css";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -16,7 +17,7 @@ import PublicIcon from "@mui/icons-material/Public";
 import MovieIcon from "@mui/icons-material/Movie";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import styles from "./Category.module.css";
+
 const Category: React.FC<{}> = () => {
   type dataModel = {
     name: string;
@@ -47,10 +48,10 @@ const Category: React.FC<{}> = () => {
       );
 
     dispatch(dataSliceAction.setCategory({ type }));
-  }, []);
+  }, [dispatch, type]);
   const history = useNavigate();
   const listClickHandler = (page: string) => {
-    history(`/${type}/${page}`);
+    history(`/navigate/${type}/${page}`);
   };
 
   return (
@@ -60,7 +61,7 @@ const Category: React.FC<{}> = () => {
           <CircularProgress></CircularProgress>
         </Box>
       )}
-      {errorMessage && <div>{errorMessage}</div>}
+      {errorMessage && <Box>{errorMessage}</Box>}
       {!errorMessage && (
         <List>
           {categoryData.map((item: dataModel, index) => (

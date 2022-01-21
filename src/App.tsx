@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Landingpage from "./pages/landingpage";
 import Header from "./components/Header";
 import Layout from "./components/Layout";
@@ -23,7 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Landingpage></Landingpage>}></Route>
             <Route
-              path="/:type"
+              path="navigate/:type"
               element={
                 <Layout diplayClass="box-content">
                   <CategoryPage></CategoryPage>
@@ -31,13 +31,14 @@ function App() {
               }
             ></Route>
             <Route
-              path="/:type/:page"
+              path="navigate/:type/:page"
               element={
                 <Layout diplayClass="box-content form_container">
                   <DetailsPage></DetailsPage>
                 </Layout>
               }
             ></Route>
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Layout>
       </Suspense>
